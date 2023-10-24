@@ -25,9 +25,14 @@ const UpdateProfile = ({ navigation }:any) => {
     setImage(image?.path);
   });
 }
-  const handleSave = () => {
-    navigation.navigate('Home', { name, occupation, website, image });
-  };
+const handleSave = () => {
+  navigation.navigate('Home', { 
+    name: name, 
+    occupation: occupation, 
+    website: website, 
+    image: image 
+  });
+};
 
   
   return (

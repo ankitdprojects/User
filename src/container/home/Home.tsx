@@ -1,18 +1,18 @@
   import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, Animated } from 'react-native'
-  import React, { useEffect, useRef, useState } from 'react'
+  import React, { useContext, useEffect, useRef, useState } from 'react'
   import { styles } from './styles'
   import Header from '../../components/header/Header'
   import { Polygon, Svg } from 'react-native-svg'
   import {  HomeIcon, UpIcon } from '../../assets/SvgImage'
   import HorizontalLineWithDecagon from '../../components/HorizontalDectagonal/HorizontalDectagonal'
+import { DataContext } from '../../components/context/DataContext'
 
   const Home = ({route}:any) => {
     const name = route?.params?.name;
     const occupation = route?.params?.occupation;
     const website = route?.params?.website;
     const image= route?.params?.image
-    const storyImage= route?.params?.storyImage
-    const newsText= route?.params?.newsText
+    const { storyText, storyImage }: any = useContext(DataContext);
     const screen= route?.params?.screen
       const [modalVisible, setModalVisible] = useState(false);
       const [largeImageModalVisible, setLargeImageModalVisible] = useState(false);
@@ -30,7 +30,7 @@
           return `${x},${y}`;
         }).join(' ');
         const handleModal = () => {
-          if (route?.params?.screen === 'Story') {
+          
             setModalVisible(true);
             const interval = setInterval(() => {
               setCount((prevCount) => prevCount + 1);
@@ -46,7 +46,7 @@
               clearTimeout(timer); // Clear the timeout
               clearInterval(interval); // Clear the interval in the cleanup function
             };
-          }
+          
         };
      
       console.log(count,"count")
@@ -89,7 +89,7 @@
             <View style={styles.ImageContainer}>
               <View style={styles.Decagonal}>
             <Svg height={200} width={200}>
-              <Polygon points={points} fill="none" stroke={screen ==="Story"? "#f5da42": "black" } strokeWidth={5} />
+              <Polygon points={points} fill="none" stroke={storyImage || storyText? "#f5da42": "black" } strokeWidth={5} />
             </Svg>
             </View>
 
@@ -164,7 +164,7 @@
                   <Image source={{uri: storyImage}} style={styles.NewsImg}/>
                 </View>
                 <View>
-                <Text style={styles.NewsTxt}>{newsText}</Text>
+                <Text style={styles.NewsTxt}>{storyText}</Text>
                 </View>
               </View>
             </Modal>

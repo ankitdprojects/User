@@ -1,12 +1,15 @@
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { styles } from './styles'
 import ImageCropPicker from 'react-native-image-crop-picker'
+import { DataContext } from '../../components/context/DataContext'
 
 const Story = ({navigation}:any) => {
   const [addStory, setAddStory] = useState<boolean>(false)
   const [addImage, setAddImage] = useState<boolean>(false)
   const [textData, setTextData] = useState<string>("")
+  const { setStoryText, setStoryImage }: any = useContext(DataContext);
+
   const handleOpenPicker = () => {
     setAddStory(true)
     ImageCropPicker.openPicker({
@@ -24,8 +27,11 @@ const Story = ({navigation}:any) => {
     });;
   }
   const handleSave = () => {
-    navigation.navigate('Home',{ storyImage: addImage, newsText: textData, screen: "Story"});
+    setStoryImage(addImage)
+    setStoryText(textData)
+    navigation.navigate('Home');
   };
+  
 
   return (
   
