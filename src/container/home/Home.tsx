@@ -16,7 +16,6 @@
     const screen= route?.params?.screen
       const [modalVisible, setModalVisible] = useState(false);
       const [largeImageModalVisible, setLargeImageModalVisible] = useState(false);
-      const [lineColor, setLineColor] = useState('#f5da42');
       const animatingProgressBar = useRef(new Animated.Value(0));
       const [animDelay, setAnimDelay] = useState(0);
       const [animDuration, setAnimDuration] = useState(5000);

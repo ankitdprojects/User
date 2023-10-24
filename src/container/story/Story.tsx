@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { styles } from './styles'
 import ImageCropPicker from 'react-native-image-crop-picker'
@@ -28,7 +28,11 @@ const Story = ({navigation}:any) => {
   };
 
   return (
-    <View style={styles.Container}>
+  
+  
+    <SafeAreaView style={styles.Container}>
+    <ScrollView contentContainerStyle={styles.Container}>
+  <View style={styles.Container}>
            <View style={styles.CenteredView}>
             {
               addStory ?
@@ -71,6 +75,8 @@ null
               
               </View>
     </View>
+    </ScrollView>
+    </SafeAreaView>
   )
 }
 
